@@ -2,54 +2,13 @@ use std::io;
 use test1::main::input_funds;
 use test2::main::calc_by_coin;
 
-struct Product {
-   title: String,
-   value: f32,
+pub struct Product {
+   pub title: String,
+   pub value: f32,
 }
 
 pub fn get_price() -> (bool, f32) {
-   let products: Vec<Product> = vec![
-      Product {
-         title: "1".to_string(),
-         value: 1.0,
-      },
-      Product {
-         title: "2".to_string(),
-         value: 2.1,
-      },
-      Product {
-         title: "3".to_string(),
-         value: 3.3,
-      },
-      Product {
-         title: "4".to_string(),
-         value: 4.4,
-      },
-      Product {
-         title: "5".to_string(),
-         value: 5.5,
-      },
-      Product {
-         title: "6".to_string(),
-         value: 6.6,
-      },
-      Product {
-         title: "7".to_string(),
-         value: 7.7,
-      },
-      Product {
-         title: "8".to_string(),
-         value: 8.8,
-      },
-      Product {
-         title: "9".to_string(),
-         value: 9.8,
-      },
-      Product {
-         title: "10".to_string(),
-         value: 10.10,
-      },
-   ];
+   let products = get_products();
 
    loop {
       println!("-------Products-------");
@@ -110,4 +69,50 @@ fn main() {
       calc_by_coin(remain);
       println!("");
    }
+}
+
+pub fn get_products() -> Vec<Product> {
+   let products: Vec<Product> = vec![
+      Product {
+         title: "1".to_string(),
+         value: 1.0,
+      },
+      Product {
+         title: "2".to_string(),
+         value: 2.1,
+      },
+      Product {
+         title: "3".to_string(),
+         value: 3.3,
+      },
+      Product {
+         title: "4".to_string(),
+         value: 4.4,
+      },
+      Product {
+         title: "5".to_string(),
+         value: 5.5,
+      },
+      Product {
+         title: "6".to_string(),
+         value: 6.6,
+      },
+      Product {
+         title: "7".to_string(),
+         value: 7.7,
+      },
+      Product {
+         title: "8".to_string(),
+         value: 8.8,
+      },
+      Product {
+         title: "9".to_string(),
+         value: 9.8,
+      },
+      Product {
+         title: "10".to_string(),
+         value: 10.10,
+      },
+   ];
+   products
 }

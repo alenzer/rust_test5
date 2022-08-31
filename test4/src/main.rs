@@ -56,10 +56,43 @@ pub fn calc() -> (bool, [i32;8], f32) {
       }
    }
 }
-fn main() {
+pub fn calc_balance(coin_balance: [i32;8], coin_input: [i32;8], funds: f32) -> (bool, [i32;8])
+{
    let coins = get_coins();
-   let mut coin_balance: [i32;8] = [20;8];
    let max = 50;
+
+   let mut temp_balance: [i32;8] = coin_balance;
+   for i in 0..coin_balance.len() {
+      temp_balance[i] += coin_input[i];
+
+      if temp_balance[i] > max {
+         println!("Exceed Max storage, {:.2} COIN", coins[i]);
+         return (true, [0;8])
+      }
+   }
+
+   println!("Remain funds: {:.2}", funds);
+   let coin_count = calc_by_coin(funds);
+
+   for i in 0..coin_balance.len() {
+      temp_balance[i] -= coin_count[i];
+      if temp_balance[i] < 0 {
+         println!("Insufficient storage, {:.2} COIN", coins[i]);
+         return (true, [0;8])
+      }
+   }
+
+   println!("----Storage Balance-----------");
+   for i in 0..coin_balance.len() {
+      println!("{:.2} - {}", coins[i], temp_balance[i]);
+   }
+   
+   println!("");
+   return (false, temp_balance)
+}
+fn main() {
+   let mut coin_balance: [i32;8] = [20;8];
+
 
    loop {
       let (quite, coin_input, remain) = calc();
@@ -67,42 +100,10 @@ fn main() {
          break;
       }
 
-      let mut temp_balance: [i32;8] = coin_balance;
-      let mut skip = false;
-      for i in 0..coin_balance.len() {
-         temp_balance[i] += coin_input[i];
-
-         if temp_balance[i] > max {
-            skip = true;
-            println!("Exceed Max storage, {:.2} COIN", coins[i]);
-            break;
-         }
-      }
+      let (skip, balance) = calc_balance(coin_balance, coin_input, remain);
       if skip {
-         continue;
+         continue
       }
-
-      println!("Remain funds: {:.2}", remain);
-      let coin_count = calc_by_coin(remain);
-
-      for i in 0..coin_balance.len() {
-         temp_balance[i] -= coin_count[i];
-         if temp_balance[i] < 0 {
-            skip = true;
-            println!("Insufficient storage, {:.2} COIN", coins[i]);
-            break;
-         }
-      }
-      if skip {
-         continue;
-      }
-
-      println!("----Storage Balance-----------");
-      coin_balance = temp_balance;
-      for i in 0..coin_balance.len() {
-         println!("{:.2} - {}", coins[i], temp_balance[i]);
-      }
-      
-      println!("");
+      coin_balance = balance;
    }
 }

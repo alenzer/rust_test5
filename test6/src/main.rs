@@ -40,8 +40,8 @@ fn main() {
    if f_handle.is_ok() {
       let mut file = f_handle.unwrap();
       for i in 0..coin_balance.len() {
-         file.write_all(coin_balance[i].to_string().as_bytes());
-         file.write_all("\n".as_bytes());
+         file.write_all(coin_balance[i].to_string().as_bytes()).unwrap();
+         file.write_all("\n".as_bytes()).unwrap();
       }
    }
 }
