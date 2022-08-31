@@ -84,11 +84,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "test4"
+version = "0.1.0"
+dependencies = [
+ "test2",
+ "test3",
+]
+
+[[package]]
 name = "test5"
 version = "0.1.0"
 dependencies = [
  "test2",
  "test3",
+ "test4",
 ]
 
 [[package]]
