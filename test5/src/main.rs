@@ -1,9 +1,8 @@
 use std::io;
-use test2::main::{calc_by_coin, get_coins};
-use test3::main::{get_products, Product};
+use test3::main::{get_products};
 use test4::main::{calc_balance, input_funds};
 
-pub fn get_price() -> (bool, f32, bool) {
+pub fn select_product() -> (bool, f32, bool) {
    let products = get_products();
    loop {
       println!("-------Products-------");
@@ -35,7 +34,7 @@ pub fn get_price() -> (bool, f32, bool) {
    }
 }
 pub fn calc() -> (bool, [i32; 8], f32, bool) {
-   let (quite, price, service) = get_price();
+   let (quite, price, service) = select_product();
    if quite || service {
       return (quite, [0; 8], 0.0, service);
    }

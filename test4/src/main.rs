@@ -1,6 +1,6 @@
 use std::io;
 use test2::main::{calc_by_coin, get_coins};
-use test3::main::get_price;
+use test3::main::select_product;
 
 pub fn input_funds() -> (bool, [i32; 8], f32) {
    loop {
@@ -38,7 +38,7 @@ pub fn input_funds() -> (bool, [i32; 8], f32) {
 }
 
 pub fn calc() -> (bool, [i32;8], f32) {
-   let (quite, price) = get_price();
+   let (quite, price) = select_product();
    if quite {
       return (quite, [0;8], 0.0);
    }
@@ -92,7 +92,6 @@ pub fn calc_balance(coin_balance: [i32;8], coin_input: [i32;8], funds: f32) -> (
 }
 fn main() {
    let mut coin_balance: [i32;8] = [20;8];
-
 
    loop {
       let (quite, coin_input, remain) = calc();

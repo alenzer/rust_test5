@@ -7,7 +7,7 @@ pub struct Product {
    pub value: f32,
 }
 
-pub fn get_price() -> (bool, f32) {
+pub fn select_product() -> (bool, f32) {
    let products = get_products();
 
    loop {
@@ -39,7 +39,7 @@ pub fn get_price() -> (bool, f32) {
 }
 
 pub fn calc() -> (bool, f32) {
-   let (quite, price) = get_price();
+   let (quite, price) = select_product();
    if quite {
       return (quite, price)
    }
